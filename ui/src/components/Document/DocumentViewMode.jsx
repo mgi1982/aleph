@@ -7,6 +7,7 @@ import DefaultViewer from 'viewers/DefaultViewer';
 import TableViewer from 'viewers/TableViewer';
 import TextViewer from 'viewers/TextViewer';
 import HtmlViewer from 'viewers/HtmlViewer';
+import JsonViewer from 'viewers/JsonViewer';
 import ImageViewer from 'viewers/ImageViewer';
 import FolderViewer from 'viewers/FolderViewer';
 import EmailViewer from 'viewers/EmailViewer';
@@ -76,6 +77,9 @@ export class DocumentViewMode extends React.Component {
     }
     if (document.schema.isA('Article')) {
       return <ArticleViewer document={document} dir={dir} />;
+    }
+    if (document.schema.isA('Document') || document.properties.fileName.endsWith('json')) {
+      return <JsonViewer document={document} dir={dir} />;
     }
     return <DefaultViewer document={document} dir={dir} />;
   }
